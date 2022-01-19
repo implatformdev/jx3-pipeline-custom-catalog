@@ -81,5 +81,5 @@ kubectl -n jx-staging delete externalsecret $APPNAME-${APPNAME}db
 kubectl -n jx-staging delete secret $APPNAME-${APPNAME}db
 kubectl -n jx-staging delete secret $(kubectl -n jx-staging get secret | grep $APPNAME-$APPNAME-token-* | awk NF=1)
 kubectl -n jx-staging delete serviceaccount $APPNAME-$APPNAME
-kubectl patch pvc data-$APPNAME-${APPNAME}db-0 -p '{"metadata":{"finalizers":null}}'
+kubectl -n jx-staging patch pvc data-$APPNAME-${APPNAME}db-0 -p '{"metadata":{"finalizers":null}}'
 kubectl -n jx-staging delete pvc data-$APPNAME-${APPNAME}db-0
