@@ -56,7 +56,7 @@ cd ${CLUSTER_REPO}
 
 echo "Deleting app from staging"
 # Delete chart entry in the helmfiles/jx-staging/helmfile.yaml
-awk -i inplace -v pattern="- chart: dev\/$APPNAME" 'BEGIN{ print_flag=1 } 
+awk -i inplace -v pattern="- chart: dev\/$APPNAME[[:blank:]]*$" 'BEGIN{ print_flag=1 } 
 {
     if( $0 ~ pattern ) 
     {
@@ -70,7 +70,9 @@ awk -i inplace -v pattern="- chart: dev\/$APPNAME" 'BEGIN{ print_flag=1 }
     if ( print_flag == 1 ) 
         print $0
 
-} ' helmfiles/jx-staging/helmfile.yaml
+} ' helmfiles/jx-staging/helmfile.yaml > helmfile.tmp
+
+mv helmfile.tmp helmfiles/jx-staging/helmfile.yaml
 
 # echo "Deleting app from production"
 # Delete chart entry in the helmfiles/jx-production/helmfile.yaml
