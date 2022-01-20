@@ -56,7 +56,7 @@ cd ${CLUSTER_REPO}
 
 echo "Deleting app from staging"
 # Delete chart entry in the helmfiles/jx-staging/helmfile.yaml
-awk -i inplace -v pattern="- chart: dev\/$APPNAME[[:blank:]]*$" 'BEGIN{ print_flag=1 } 
+awk -v pattern="- chart: dev\/$APPNAME[[:blank:]]*$" 'BEGIN{ print_flag=1 } 
 {
     if( $0 ~ pattern ) 
     {
