@@ -141,5 +141,8 @@ REPLACE_ME_APP_NAMEdb:
   postgresqlUsername: testuser
   postgresqlPassword: testuser
   postgresqlDatabase: REPLACE_ME_APP_NAME
+kafka:
+  server: kafka.kafka.svc.cluster.local
+  port: 9092
 
 

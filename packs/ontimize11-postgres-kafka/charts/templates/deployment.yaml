@@ -61,6 +61,8 @@ spec:
           value: {{ .Values.jxRequirements.ingress.domain }}
         - name: DATABASE_SERVICE
           value: {{ .Release.Name }}-{{ .Chart.Name }}db
+        - name: KAFKA_SERVER
+          value: {{.Values.kafka.server}}:{{.Values.kafka.port}}
         envFrom:
 {{ toYaml .Values.envFrom | indent 10 }}
         ports:
