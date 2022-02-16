@@ -75,7 +75,7 @@ git push
 # Delete sr resources in jx namespace
 kubectl -n jx delete sr $GIT_ORGANIZATION-$APPNAME
 
-echo "Deleting  resources in staging namespace created for the database dependency..."
+echo "Deleting resources in staging namespace created for the database dependency..."
 # Delete resources in staging created for the database dependency
 kubectl -n jx-staging delete externalsecret $APPNAME-${APPNAME}db
 kubectl -n jx-staging delete secret $APPNAME-${APPNAME}db
@@ -83,3 +83,28 @@ kubectl -n jx-staging delete secret $(kubectl -n jx-staging get secret | grep $A
 kubectl -n jx-staging delete serviceaccount $APPNAME-$APPNAME
 kubectl -n jx-staging patch pvc data-$APPNAME-${APPNAME}db-0 -p '{"metadata":{"finalizers":null}}'
 kubectl -n jx-staging delete pvc data-$APPNAME-${APPNAME}db-0
+
+echo "Deleting images and charts..."
+N=0
+for digest in $(gcloud container images list-tags gcr.io/${PROJECT}/${APPNAME} --limit=999999 --format='get(digest)'); do
+    (
+      set -x
+      gcloud container images delete --quiet  --force-delete-tags "gcr.io/$PROJECT/${APPNAME}@${digest}"
+    )
+    let N=N+1
+  done
+echo "Deleted ${N} images of ${APPNAME} in gcr.io."
+
+CHARTMUSEUM=$(kubectl get ing chartmuseum -o jsonpath={.spec.rules[0].host})
+CMUSER=$(kubectl get secret jenkins-x-chartmuseum -o jsonpath={.data.BASIC_AUTH_USER} |base64 -d)
+CMPASS=$(kubectl get secrets jenkins-x-chartmuseum -o jsonpath={.data.BASIC_AUTH_PASS} |base64 -d)
+
+N=0
+for TAG in $(curl -s -X GET http://${CHARTMUSEUM}/api/charts/${APPNAME} | grep -oP 'appVersion":"\K[0-9.]+'); do
+    (
+        set -x
+      curl --user ${CMUSER}:${CMPASS}  --location --request DELETE "http://${CHARTMUSEUM}/api/charts/${APPNAME}/${TAG}"
+    )
+    let N=N+1
+done
+echo "Deleted ${N} charts of ${APPNAME} in Chartmuseum."
