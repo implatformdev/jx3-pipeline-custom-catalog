@@ -144,5 +144,8 @@ REPLACE_ME_APP_NAMEdb:
 kafka:
   server: kafka.kafka.svc.cluster.local
   port: 9092
+schema-registry:
+  server: http://schema-registry-cp-schema-registry.kafka.svc.cluster.local
+  port: 8081
 
 
