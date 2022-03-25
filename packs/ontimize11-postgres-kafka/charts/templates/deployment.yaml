@@ -64,7 +64,7 @@ spec:
         - name: KAFKA_SERVER
           value: {{.Values.kafka.server}}:{{.Values.kafka.port}}
         - name: SCHEMA_REGISTRY_SERVER
-          value: {{.Values.schema-registry.server}}:{{.Values.schema-registry.port}}
+          value: {{.Values.schemaRegistry.server}}:{{.Values.schemaRegistry.port}}
         envFrom:
 {{ toYaml .Values.envFrom | indent 10 }}
         ports:
