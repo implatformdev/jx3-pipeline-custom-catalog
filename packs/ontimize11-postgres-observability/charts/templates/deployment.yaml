@@ -62,13 +62,13 @@ spec:
         - name: DATABASE_SERVICE
           value: {{ .Release.Name }}-{{ .Chart.Name }}db
         - name: METRIC_TAG_SOURCE
-          value: { { .Values.micrometer.metrics.tags.source } }
+          value: {{ .Values.micrometer.metrics.tags.source }}
         - name: GRAFANA_SERVER
-          value: { { .Values.grafana.server } }
+          value: {{ .Values.grafana.server }}
         - name: GRAFANA_ADMIN_API_KEY
-          value: { { .Values.grafana.apiKey.admin } }
+          value: {{ .Values.grafana.apiKey.admin }}
         - name: GRAFANA_DATASOURCE_NAME
-          value: { { .Values.grafana.datasourceName } }
+          value: {{ .Values.grafana.datasourceName }}
         envFrom:
 {{ toYaml .Values.envFrom | indent 10 }}
         ports:
