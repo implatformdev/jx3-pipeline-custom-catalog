@@ -19,7 +19,7 @@ services:
     image: maven:3-jdk-11
     environment:
       - METRIC_TAG_SOURCE=SpringBoot
-      - GRAFANA_SERVER=http://localhost:3000
+      - GRAFANA_SERVER=http://grafana:3000
       - GRAFANA_ADMIN_API_KEY=null
       - GRAFANA_DATASOURCE_NAME=Prometheus
     hostname: app
@@ -33,8 +33,10 @@ services:
       - database
     ports:
       - "8080:8080"
+      - "8081:8081"
     expose:
       - "8080"
+      - "8081"
 
   prometheus:
     image: prom/prometheus:v2.31.1
