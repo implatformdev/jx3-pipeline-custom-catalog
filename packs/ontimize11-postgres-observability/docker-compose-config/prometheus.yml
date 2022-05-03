@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "Ontimize Scrape"
+    metrics_path: "/ontimize/prometheus"
+    scrape_interval: 5s
+    honor_labels: true
+    tls_config:
+      insecure_skip_verify: true
+    static_configs:
+      - targets: ["host.docker.internal:8081"]
