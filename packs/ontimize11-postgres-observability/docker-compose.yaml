@@ -49,7 +49,7 @@ services:
     expose:
       - 9090
     volumes:
-      - ./docker-compose-config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
 
   grafana:
     image: grafana/grafana-oss
@@ -61,4 +61,4 @@ services:
     expose:
       - 3000
     volumes:
-      - ./docker-compose-config/grafana:/var/lib/grafana
+      - ./grafana:/var/lib/grafana
