@@ -61,6 +61,12 @@ spec:
           value: {{ .Values.jxRequirements.ingress.domain }}
         - name: DATABASE_SERVICE
           value: {{ .Release.Name }}-{{ .Chart.Name }}db
+        
+        {{- if .Values.jxRequirements.ingress.tls.enabled }}
+        - name: TLS
+          value: enabled
+        {{- end }}
+        
         envFrom:
 {{ toYaml .Values.envFrom | indent 10 }}
         ports:
