@@ -57,7 +57,7 @@ services:
     environment:
       POSTGRESQL_USERNAME: testuser
       POSTGRESQL_PASSWORD: testuser
-      POSTGRESQL_DATABASE: kafkaconfigprobe6local
+      POSTGRESQL_DATABASE: REPLACE_ME_APP_NAME
       POSTGRESQL_POSTGRES_PASSWORD: testuser
     hostname: database
     container_name: database
@@ -72,7 +72,7 @@ services:
     hostname: app
     container_name: app
     working_dir: /app
-    command: sh -c "mvn clean install -P compose && java -jar kafkaconfigprobe6local-boot/target/kafkaconfigprobe6local-boot.jar --spring.profiles.active=compose"
+    command: sh -c "mvn clean install -P compose && java -jar REPLACE_ME_APP_NAME-boot/target/REPLACE_ME_APP_NAME-boot.jar --spring.profiles.active=compose"
     environment:
       KAFKA_SERVER: localhost:9092
       SCHEMA_REGISTRY_SERVER: http://localhost:8081
