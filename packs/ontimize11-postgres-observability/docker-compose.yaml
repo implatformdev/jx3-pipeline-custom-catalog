@@ -1,51 +1,11 @@
 version: '3'
 services:
-  database:
-    image: bitnami/postgresql:11.12.0-debian-10-r13
-    environment:
-      - POSTGRESQL_USERNAME=testuser
-      - POSTGRESQL_PASSWORD=testuser
-      - POSTGRESQL_DATABASE=REPLACE_ME_APP_NAME
-      - POSTGRESQL_POSTGRES_PASSWORD=testuser
-    hostname: database
-    container_name: database
-    restart: always
-    ports:
-      - "5432:5432"
-    expose:
-      - "5432"
-
-  app:
-    image: maven:3-jdk-11
-    environment:
-      - METRIC_TAG_SOURCE=SpringBoot
-      - GRAFANA_SERVER=http://grafana:3000
-      - GRAFANA_ADMIN_API_KEY=null
-      - GRAFANA_DATASOURCE_NAME=Prometheus
-    hostname: app
-    container_name: app
-    working_dir: /app
-    command: sh -c "mvn install -P compose && java -jar REPLACE_ME_APP_NAME-boot/target/REPLACE_ME_APP_NAME-boot.jar --spring.profiles.active=compose"
-    volumes:
-      - ./:/app/
-    restart: always
-    depends_on:
-      - database
-    ports:
-      - "8080:8080"
-      - "8081:8081"
-    expose:
-      - "8080"
-      - "8081"
-
   prometheus:
     image: prom/prometheus:v2.31.1
     container_name: prometheus
-    depends_on:
-      - app
     command: --config.file=/etc/prometheus/prometheus.yml --log.level=debug
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - host.docker.internal:host-gateway
     ports:
       - 9090:9090
     expose:
@@ -62,5 +22,49 @@ services:
       - 3000:3000
     expose:
       - 3000
+
+  database:
+    image: bitnami/postgresql:11.12.0-debian-10-r13
+    environment:
+      - POSTGRESQL_USERNAME=testuser
+      - POSTGRESQL_PASSWORD=testuser
+      - POSTGRESQL_DATABASE=obtest5
+      - POSTGRESQL_POSTGRES_PASSWORD=testuser
+    hostname: database
+    container_name: database
+    depends_on:
+      - grafana
+      - prometheus
+    restart: always
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+
+  app:
+    image: maven:3-jdk-11
+    hostname: app
+    container_name: app
+    working_dir: /app
+    command: sh -c "./docker-app.sh"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - METRIC_TAG_SOURCE=SpringBoot
+      - DATABASE_SERVICE=database
+      - GRAFANA_SERVER=http://grafana:3000
+      - GRAFANA_ADMIN_API_KEY=
+      - GRAFANA_DATASOURCE_NAME=Prometheus
     volumes:
-      - ./grafana:/var/lib/grafana
+      - ./:/app/
+    restart: always
+    depends_on:
+      - database
+      - grafana
+      - prometheus
+    ports:
+      - 8080:8080
+      - 8081:8081
+    expose:
+      - 8080
+      - 8081
