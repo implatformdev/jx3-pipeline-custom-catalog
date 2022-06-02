@@ -28,7 +28,7 @@ services:
     environment:
       - POSTGRESQL_USERNAME=testuser
       - POSTGRESQL_PASSWORD=testuser
-      - POSTGRESQL_DATABASE=obtest5
+      - POSTGRESQL_DATABASE=REPLACE_ME_APP_NAME
       - POSTGRESQL_POSTGRES_PASSWORD=testuser
     hostname: database
     container_name: database

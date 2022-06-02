@@ -18,4 +18,4 @@ echo "DOCKER-APP.SH -> COMPILE APP"
 mvn clean install -P compose
 
 echo "DOCKER-APP.SH -> RUN APP"
-java -jar obtest5-boot/target/obtest5-boot.jar --spring.profiles.active=compose
+java -jar REPLACE_ME_APP_NAME-boot/target/REPLACE_ME_APP_NAME-boot.jar --spring.profiles.active=compose
