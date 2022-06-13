@@ -95,9 +95,9 @@ for digest in $(gcloud container images list-tags gcr.io/${PROJECT}/${APPNAME} -
   done
 echo "Deleted ${N} images of ${APPNAME} in gcr.io."
 
-CHARTMUSEUM=$(kubectl get ing chartmuseum -o jsonpath={.spec.rules[0].host})
-CMUSER=$(kubectl get secret jenkins-x-chartmuseum -o jsonpath={.data.BASIC_AUTH_USER} |base64 -d)
-CMPASS=$(kubectl get secrets jenkins-x-chartmuseum -o jsonpath={.data.BASIC_AUTH_PASS} |base64 -d)
+CHARTMUSEUM=$(kubectl -n jx get ing chartmuseum -o jsonpath={.spec.rules[0].host})
+CMUSER=$(kubectl -n jx get secret jenkins-x-chartmuseum -o jsonpath={.data.BASIC_AUTH_USER} |base64 -d)
+CMPASS=$(kubectl -n jx get secrets jenkins-x-chartmuseum -o jsonpath={.data.BASIC_AUTH_PASS} |base64 -d)
 
 N=0
 for TAG in $(curl -s -X GET http://${CHARTMUSEUM}/api/charts/${APPNAME} | grep -oP 'appVersion":"\K[0-9.]+'); do
