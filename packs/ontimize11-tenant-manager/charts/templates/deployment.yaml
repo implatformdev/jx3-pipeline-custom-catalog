@@ -67,6 +67,8 @@ spec:
           value: {{ .Values.appdb.postgresqlUsername }}
         - name: APP_DATABASE_PASSWORD
           value: {{ .Values.appdb.postgresqlPassword }}
+        - name: APP_AUTH_URL
+          value: http://keycloak-jx-staging.{{ .Values.jxRequirements.ingress.domain }}/auth
         - name: TENANT_MANAGER_USERNAME
           valueFrom:
             secretKeyRef:
