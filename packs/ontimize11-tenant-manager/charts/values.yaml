@@ -147,4 +147,7 @@ appdb:
   postgresqlUsername: postgres
   postgresqlPassword: test
 
-
+auth:
+  username: admin
+  # A random password is generated if this value is not defined 
+  #password: test
