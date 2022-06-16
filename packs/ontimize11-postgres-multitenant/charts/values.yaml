@@ -142,5 +142,5 @@ REPLACE_ME_APP_NAMEdb:
   postgresqlPassword: testuser
   postgresqlDatabase: REPLACE_ME_APP_NAME
 tenantmanager:
-  secret: REPLACE_ME_APP_NAME-tenant-manager
+  secret: REPLACE_ME_APP_NAMEtm-auth
 

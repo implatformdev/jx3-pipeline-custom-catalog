@@ -72,12 +72,12 @@ spec:
         - name: TENANT_MANAGER_USERNAME
           valueFrom:
             secretKeyRef:
-              name: {{ trimSuffix "tm" .Release.Name }}-tenant-manager
+              name: {{ .Release.Name }}-auth
               key: username
         - name: TENANT_MANAGER_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ trimSuffix "tm" .Release.Name }}-tenant-manager
+              name: {{ .Release.Name }}-auth
               key: password
         
         {{- if .Values.jxRequirements.ingress.tls.enabled }}
