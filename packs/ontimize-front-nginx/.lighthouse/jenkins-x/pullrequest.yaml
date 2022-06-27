@@ -30,6 +30,9 @@ spec:
 #          resources: {}
         - name: build-ui-build
           resources: {}
+          script: |
+            #!/bin/sh
+            npm run k8s
         - name: check-registry
           resources: {}
         - name: build-container-build
