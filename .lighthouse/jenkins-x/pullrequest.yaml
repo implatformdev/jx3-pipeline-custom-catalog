@@ -13,10 +13,7 @@ spec:
         stepTemplate:
           image: uses:jenkins-x/jx3-pipeline-catalog/tasks/go/release.yaml@b52a202405538287e2058b754aa761cd17baf2d7
           name: ""
-          resources:
-            requests:
-              cpu: 400m
-              memory: 600Mi
+          resources: {}
           workingDir: /workspace/source
         steps:
         - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@versionStream
