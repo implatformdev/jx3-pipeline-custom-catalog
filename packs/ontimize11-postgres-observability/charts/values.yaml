@@ -3,8 +3,10 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 # Add annotations to the pods
-podAnnotations: {}
-# Add labels to the pods
+podAnnotations:
+  prometheus.io/path: "/ontimize/prometheus"
+  prometheus.io/port: "8081"
+  prometheus.io/scrape: "true"
 podsLabels: {}
 # Add labels to the deployment
 deploymentLabels: {}
@@ -107,7 +109,7 @@ grafana:
   server: http://grafana.jx-observability:80
   datasourceName: Prometheus
   apiKey:
-    admin: eyJrIjoiNU02M0FaT0pNTkdGblAyMmlzRFlYemFMeUNNMmNhSDIiLCJuIjoib250aW1pemUtb2JzZXJ2YWJpbGl0eSIsImlkIjoxfQ==
+    admin: eyJrIjoicjl3NG9tVzFva2dZaXBOOGFYeDJ3RnBrdHVvcE1USTYiLCJuIjoib250aW1pemUtYmFzZSIsImlkIjoxfQ==
 
 # custom ingress annotations on this service
 ingress:
