@@ -34,7 +34,7 @@ spec:
           resources: {}
           script: |
             #!/bin/sh
-            npm run k8s
+            npm run preview
         - name: check-registry
           resources: {}
         - name: build-container-build

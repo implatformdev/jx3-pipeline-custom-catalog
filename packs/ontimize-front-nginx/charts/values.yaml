@@ -23,8 +23,9 @@ jx:
   releaseCRD: true
 
 # define environment variables here as a map of key: value
+# Enable ENDPOINT to set a backend url not defined in environment.ts files 
 env:
-
+#  ENDPOINT: "http://set_here_backend_url"
 # enable this flag to use knative serve to deploy the app
 knativeDeploy: false
 

@@ -42,7 +42,7 @@ spec:
           resources: {}
           script: |
             #!/bin/sh
-            npm run k8s
+            npm run release
         - name: check-registry
           resources: {}
         - name: build-container-build
