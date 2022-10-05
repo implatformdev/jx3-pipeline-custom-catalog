@@ -109,7 +109,7 @@ grafana:
   server: http://grafana.jx-observability:80
   datasourceName: Prometheus
   apiKey:
-    admin: eyJrIjoiNU02M0FaT0pNTkdGblAyMmlzRFlYemFMeUNNMmNhSDIiLCJuIjoib250aW1pemUtb2JzZXJ2YWJpbGl0eSIsImlkIjoxfQ==
+    admin: eyJrIjoicjl3NG9tVzFva2dZaXBOOGFYeDJ3RnBrdHVvcE1USTYiLCJuIjoib250aW1pemUtYmFzZSIsImlkIjoxfQ==
 
 # custom ingress annotations on this service
 ingress:
