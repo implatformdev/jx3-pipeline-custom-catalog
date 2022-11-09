@@ -48,7 +48,7 @@ spec:
             # modify the pom.xml
             echo "upgrading the pom to version $VERSION"
             mvn versions:set -DnewVersion=$VERSION
-            mvn --no-transfer-progress clean deploy -Pk8s
+            mvn --no-transfer-progress clean deploy -Prelease
         - name: check-registry
           resources: {}
         - name: build-container-build
