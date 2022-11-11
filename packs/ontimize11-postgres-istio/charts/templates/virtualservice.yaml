@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.service.name }}
 spec:
   hosts:
-  - "{{ .Values.service.name }}.{{ .Values.istio.domain }}""
+  - "{{ .Values.service.name }}.{{ .Values.istio.domain }}"
   gateways:
   - {{ .Values.istio.gateway }}
   http:
