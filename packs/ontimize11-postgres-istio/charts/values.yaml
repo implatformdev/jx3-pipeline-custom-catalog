@@ -15,7 +15,7 @@ image:
   pullPolicy: IfNotPresent
 
 istio:
-  domain: 35.226.184.122.nip.io
+  domain: 34.66.151.30.nip.io
   gateway: istio-system/jx-istio-gateway
   
 # optional list of image pull secrets to use to pull images
